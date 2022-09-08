@@ -71,12 +71,13 @@ public class Main {
             new Person(8, "Amelia"),
     };
 
-    public static void sort(Person[] p){
-        List<Person> list = Arrays.asList(p);
-        list.stream()
+    private static Map<String, Long> sortData(Person[] rawData) {
+        return Arrays
+                .stream(rawData)
+                .filter(Objects::nonNull)
                 .distinct()
-                .collect(Collectors.groupingBy(Person::getName, Collectors.counting()))
-                .forEach((s, count) -> System.out.printf("Key: %s%nValue: %d%n", s, count));
+                .sorted(Comparator.comparing(Person::getId))
+                .collect(Collectors.groupingBy(Person::getName, Collectors.counting()));
     }
 
     public static void main(String[] args) {
@@ -93,7 +94,11 @@ public class Main {
         System.out.println("Duplicate filtered, grouped by name, sorted by name and id:");
         System.out.println();
 
-        sort(RAW_DATA);
+        Map<String, Long> sortData = sortData(RAW_DATA);
+        for (Map.Entry<String, Long> entry : sortData.entrySet()) {
+            System.out.println("Key: " + entry.getKey());
+            System.out.println("Value: " + entry.getValue());
+        }
     }
 }
 

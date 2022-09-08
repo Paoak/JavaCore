@@ -18,6 +18,9 @@ public class Main {
 
     //Решение с помощью двуx указателей
     public static int[] twoSum(int[] nums, int summResult){
+        if (nums.length == 0){
+            throw new IllegalArgumentException();
+        }
         int l = 0;
         int r = nums.length-1;
         while (l<r){

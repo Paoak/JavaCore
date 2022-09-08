@@ -27,7 +27,9 @@ public class Main {
     }
 
     public static boolean fuzzySearch(String required, String given){
-
+        if(required.isEmpty() || given.isEmpty()){
+            throw new IllegalArgumentException();
+        }
         char[] req = required.toCharArray();
         char[] giv = given.toCharArray();
         char[] res = new char[req.length];
@@ -43,13 +45,6 @@ public class Main {
                 }
             }
         }
-//        System.out.println("Required " + Arrays.toString(req));
-//        System.out.println("Given " + Arrays.toString(giv));
-//        System.out.println("Result " + Arrays.toString(res));
-//        System.out.println("***************************************************************");
-//        System.out.println("EQUALITY Req and Res " + Arrays.equals(req, res));
-//        System.out.println("***************************************************************");
-//        System.out.println(" ");
         return Arrays.equals(req, res);
     }
 }
